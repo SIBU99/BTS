@@ -88,7 +88,19 @@ class Parent(models.Model):
     def childrens(self):
         "this will return the list of his/her Children"
         return self.childParent.all()
-
+    
+    @property
+    def childrens_id(self):
+        "this will return the list of his/her Children"
+        return self.childParent.all().values_list("id", flat=True)
+    
+    @property
+    def childrens_name(self):
+        "this will return the list of his/her Children"
+        data = []
+        for i in self.childParent.all():
+            data.append(i.fullname)
+        return data
 
     class Meta:
         verbose_name = "Parent"
